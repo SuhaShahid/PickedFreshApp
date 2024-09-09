@@ -1,0 +1,129 @@
+body {
+  padding: 0%;
+  margin: 0%;
+  background-color: white;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #bfd093;
+
+  padding: 15px 20px;
+  align-items: center;
+}
+ul {
+  display: flex;
+  list-style: none;
+  flex-direction: row;
+  float: right;
+  /* margin: 0%; */
+}
+a {
+  text-decoration: none;
+  color: #000000;
+}
+a:hover {
+  text-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
+}
+li {
+  padding: 0px 20px;
+}
+.search input[type="search"] {
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  color: #333333;
+}
+.search {
+  align-items: center;
+  color: #000000;
+}
+section {
+  padding: 30px 0;
+  margin-bottom: 20px;
+}
+
+.intro {
+  display: flex;
+  padding-top: 50px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px auto;
+  max-width: 70%;
+}
+.imgContainer #image1 {
+  height: 100%;
+  width: auto;
+}
+.imgContainer {
+  height: 300px;
+  width: auto;
+  padding-left: 20px;
+  object-fit: cover;
+  object-position: center;
+}
+p{
+  font-size: 15px;
+}
+.textContainer {
+  padding: 10px;
+  /* padding-left: 10px; */
+  /* width: 50%; */
+  height: auto;
+  line-height: 25px;
+}
+.textContainer h1 {
+  font-size: 45px;
+}
+#shop {
+  color: rgb(187, 187, 68);
+}
+.buttons button {
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: none;
+  background-color: #000;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.about {
+  margin: auto;
+  text-align: center;
+  max-width: 70%;
+}
+.about #about-img {
+  height: 250px;
+  width: 450px;
+}
+.about h1 {
+  font-size: 40px;
+}
+.about p {
+  font-size: 20px;
+}
+.products {
+  max-width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.box {
+  background-color: white;
+  height: auto;
+  width: 15%;
+  border: 1px solid #6f6969;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: medium;
+  line-height: 20px;
+}
