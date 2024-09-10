@@ -4,7 +4,7 @@ body {
   background-color: white;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
-
+/* nav bar */
 nav {
   display: flex;
   justify-content: space-between;
@@ -42,7 +42,7 @@ a:hover {
 section {
   padding: 30px 0;
 }
-
+/* herosection */
 .intro {
   display: flex;
   justify-content: space-between;
@@ -89,13 +89,13 @@ section {
 .buttons button:hover {
   background-color: #444;
 }
-
+/* about section */
 .about, .chooseUs {
   text-align: center;
   max-width: 70%;
   margin: auto;
 }
-
+/* product section */
 .products {
   text-align: center;
   background-image: url(images/vegetables-bg.png);
@@ -136,7 +136,7 @@ section {
 .box button:hover {
   background-color: #444;
 }
-
+/* review section */
 .reviewMain {
   padding: 50px;
   text-align: center;
@@ -146,14 +146,20 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 50%;
+  margin: 0 auto;
 }
 
 .arrow {
+  background-color: rgb(203, 203, 112);
+  /* border-radius: 50%; */
+  padding: 8px;
   height: 30px;
   width: 30px;
   cursor: pointer;
   margin: 0 15px;
 }
+/* contact form */
 .contactUs{
   text-align: center;
 }
@@ -167,7 +173,18 @@ section {
   display: flex;
   flex-direction: column;
 }
-
+.contactContainer button{
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: none;
+  width: 100px;
+  background-color: #000;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
 .contactContainer input[type="text"],
 .contactContainer input[type="number"] {
   padding: 10px;
@@ -175,16 +192,63 @@ section {
   border-radius: 4px;
   border: 1px solid #ccc;
 }
-
+/* footer section */
 footer {
-  text-align: center;
-  padding: 20px;
   background-color: #333;
   color: white;
-  justify-content: space-between;
-  display:flex ;
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+  flex-wrap: wrap;
+  text-align: left;
 }
-.columns
-{
+
+footer h1 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+footer p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+footer img {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.columns {
+  flex: 1;
+  max-width: 250px;
+  margin: 20px 0;
+}
+#newsletter{
+  display: flex;
+  flex-direction: column;
+}
+#newsletter input[type="text"]{
   padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
+#newsletter button{
+  padding: 12px 20px;
+  width: 150px;
+  border-radius: 4px;
+  border: none;
+  background-color: #000;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
+.copyRight {
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  margin-top: 1px;
+}
+
