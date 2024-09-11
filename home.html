@@ -6,24 +6,17 @@
     <link rel="stylesheet" href="home.css" />
     <title>PickedFresh</title>
   </head>
-  <body>
+  <body id="body">
     <nav>
       <a href="home.html"><img id="logo" src="images/logo.png" /></a>
       <ul>
         <li><a href="#intro-sec">Home</a></li>
         <li><a href="#about-sec">About Us</a></li>
-        <li><a href="products.html">Shop</a></li>
+        <li><a href="product/products.html">Shop</a></li>
         <li><a href="#contactUs">Contact Us</a></li>
-        <li>
-          <a href=""
-            ><img id="icons" src="images/searchIcon.png" alt="" srcset=""
-          /></a>
-        </li>
-        <li>
-          <a href=""
-            ><img id="icons" src="images/cart.png" alt="" srcset=""
-          /></a>
-        </li>
+        <li><a href="" id="category">Category</a></li>
+        <li><a href=""><img id="icons" src="images/searchIcon.png" alt="" /></a></li>
+        <li><a href=""><img id="icons" src="images/cart.png" alt="" /></a></li>
       </ul>
     </nav>
 
@@ -35,22 +28,15 @@
         <div class="textContainer">
           <h1>Vegetables</h1>
           <h1 id="shop">Shop</h1>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora
-            blanditiis quibusdam corporis accusantium iure tempore, quaerat
-            molestias error modi aliquid.
-          </p>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit...</p>
           <div class="buttons">
-            <a href="product/products.html"
-              ><button type="button">Buy Now</button></a
-            >
+            <a href="product/products.html"><button type="button">Buy Now</button></a>
             <button type="button">Read More</button>
           </div>
         </div>
       </div>
     </section>
-
-    <section id="about-sec">
+<section id="about-sec">
       <div class="about">
         <img src="images/img-2.png" />
         <h1>About Our Shop</h1>
@@ -64,97 +50,14 @@
         </div>
       </div>
     </section>
-
     <section id="products-sec">
       <div class="products">
-        <img src="images/img-2.png" />
+      <img src="images/img-2.png" />
         <h1>Our Vegetables</h1>
         <div class="boxes">
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-
-            <button type="button">Buy</button>
-          </div>
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-            <button type="button">Buy</button>
-          </div>
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-            <button type="button">Buy</button>
-          </div>
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-            <button type="button">Buy</button>
-          </div>
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-            <button type="button">Buy</button>
-          </div>
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-            <button type="button">Buy</button>
-          </div>
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-            <button type="button">Buy</button>
-          </div>
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-            <button type="button">Buy</button>
-          </div>
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-            <button type="button">Buy</button>
-          </div>
-          <div class="box">
-            <img src="images/img-4.png" />
-            <h3>$12.99</h3>
-            <h4>Tomato</h4>
-            <h4>1 kg</h4>
-            <p>Fresh and organic carrots from our local farms.</p>
-            <button type="button">Buy</button>
-          </div>
         </div>
       </div>
     </section>
-
     <section id="whyUs-sec">
       <div class="chooseUs">
         <img src="images/img-2.png" alt="Why Choose Us" />
@@ -208,9 +111,9 @@
           <input type="text" name="msg" placeholder="Message" />
           <button type="button">Submit</button>
         </form>
+        <div class="map"></div>
       </div>
     </section>
-
     <footer id="footer">
       <div class="columns">
         <h1>Address</h1>
@@ -235,6 +138,7 @@
     <div class="copyRight">
       <p>CopyRight 2024 All Rights Reserved</p>
     </div>
+     
     <script src="home.js"></script>
   </body>
 </html>

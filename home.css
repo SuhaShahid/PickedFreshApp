@@ -171,13 +171,16 @@ a button {
   text-align: center;
 }
 .contactContainer {
-  max-width: 50%;
+  max-width: 70%;
   margin: auto;
   padding: 30px;
+  column-gap: 10px;
+  display: flex;
 }
 
 .contactContainer form {
   display: flex;
+  width: 50%;
   flex-direction: column;
 }
 .contactContainer button {
@@ -198,6 +201,11 @@ a button {
   margin: 10px 0;
   border-radius: 4px;
   border: 1px solid #ccc;
+}
+.map {
+  background-color: #bfd093;
+  width: 50%;
+  height: auto;
 }
 /* footer section */
 footer {
@@ -276,6 +284,10 @@ footer img {
   }
   .buttons {
     justify-content: center;
+  }
+  .contactContainer {
+    display: flex;
+    flex-direction: column;
   }
   .imgContainer,
   #image1 {
