@@ -2,7 +2,7 @@ let productsData = [];
 let totalItems = 0;
 
 function getData() {
-  fetch("https://dummyjson.com/products/category/groceries")
+  fetch("https://dummyjson.com/products/category/groceries?limit=10&skip=0")
     .then((res) => res.json())
     .then((data) => {
       totalItems = data.total;

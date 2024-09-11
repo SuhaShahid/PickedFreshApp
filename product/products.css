@@ -4,6 +4,7 @@ body {
   background-color: white;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -11,13 +12,17 @@ nav {
   padding: 15px 20px;
   align-items: center;
 }
+
 nav #icons {
   height: 20px;
   width: 20px;
 }
+
 ul {
   display: flex;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -52,7 +57,8 @@ a:hover {
   gap: 20px;
   justify-items: center;
   max-width: 90%;
-  margin: auto;
+  padding: 30px;
+  margin: 0 auto;
 }
 
 .box {
@@ -81,8 +87,34 @@ a:hover {
 .box button:hover {
   background-color: #444;
 }
-h1{
+
+h1 {
   font-family: 'Times New Roman', Times, serif;
   text-align: center;
   font-size: 40px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+  }
+
+  ul li {
+    padding: 10px 0;
+  }
+
+  .boxes {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .box img{
+    height: 100px;
+    width:100px;
+  }
+  .box {
+    margin: 0 auto;
+    text-wrap: wrap;
+    padding: 20px;
+  }
 }
