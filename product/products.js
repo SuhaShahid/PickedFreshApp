@@ -67,8 +67,10 @@ function setupPagination() {
 
 function addToCart(event) {
   let productId = event.target.dataset.id;
-  let cartIcon = document.querySelector("#cartvalue");
-  cartIcon.value += 1;
+  // let cartIcon = document.querySelector("#cartvalue");
+  // cartIcon.value += 1;
+  // console.log(cartIcon);
+  
   console.log(`Product with ID ${productId} added to cart.`);
 }
 

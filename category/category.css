@@ -15,9 +15,6 @@
      background-color: #bfd093;
      padding: 15px 20px;
      align-items: center;
-     position: sticky;
-     top: 0;
-     z-index: 1000;
    }
    
    nav #icons {
