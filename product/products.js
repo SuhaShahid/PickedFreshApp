@@ -1,14 +1,21 @@
 let productsData = [];
 let totalItems = 0;
+let limit = 20;
+let currentPage = 1;
 
-function getData() {
-  fetch("https://dummyjson.com/products/category/groceries?limit=10&skip=0")
+function getData(searchQuery = "", category = "", page = 1) {
+  let skip = (page - 1) * limit;
+  let url = `https://dummyjson.com/products${category ? `/category/${category}` : ""}?limit=${limit}&skip=${skip}`;
+  if (searchQuery)
+    url = `https://dummyjson.com/products/search?q=${searchQuery}&limit=${limit}&skip=${skip}`;
+
+  fetch(url)
     .then((res) => res.json())
     .then((data) => {
       totalItems = data.total;
       productsData = data.products;
-      console.log(data);
       getPage(productsData);
+      setupPagination();
     })
     .catch((error) => console.error("Error:", error));
 }
@@ -17,30 +24,58 @@ function getPage(data) {
   let boxes = document.querySelector(".boxes");
   let productBoxes = "";
 
-  for (let i = 0; i < data.length; i++) {
-    let product = data[i];
+  data.forEach((product) => {
     productBoxes += `
-      <div class="box">
-        <img src="${product.thumbnail}" />
-        <h3>$${product.price}</h3>
-        <h4>${product.title}</h4>
-        <h4>${product.category}</h4>
-        <p>${product.description}</p>
-        <button class="addToCart" data-id="${product.id}" type="button">Add To Cart</button>
-      </div>
-    `;
-  }
+          <div class="box">
+            <img src="${product.thumbnail}" />
+            <h3>$${product.price}</h3>
+            <h4>${product.title}</h4>
+            <h4 class="category-link" data-category="${product.category}">${product.category}</h4>
+            <p>${product.description}</p>
+            <button class="addToCart" data-id="${product.id}" type="button">Add To Cart</button>
+          </div>
+        `;
+  });
 
   boxes.innerHTML = productBoxes;
-  let addToCartBtns = document.querySelectorAll(".addToCart");
-  addToCartBtns.forEach((btn) =>
-    btn.addEventListener("click", addToCart)
+  document.querySelectorAll(".addToCart")
+    .forEach((btn) => btn.addEventListener("click", addToCart));
+  document.querySelectorAll(".category-link").forEach((link) =>
+    link.addEventListener("click", (event) => {
+      const category = event.target.dataset.category;
+      getData("", category);
+    })
   );
+}
+
+function setupPagination() {
+  const pagination = document.getElementById("pagination");
+  pagination.innerHTML = "";
+  const totalPages = Math.ceil(totalItems / limit);
+
+  for (let i = 1; i <= totalPages; i++) {
+    const button = document.createElement("button");
+    button.textContent = i;
+    button.addEventListener("click", () => {
+      currentPage = i;
+      getData(document.getElementById("searchInput").value, "", i);
+    });
+
+    pagination.appendChild(button);
+  }
 }
 
 function addToCart(event) {
   let productId = event.target.dataset.id;
+  let cartIcon = document.querySelector("#cartvalue");
+  cartIcon.value += 1;
   console.log(`Product with ID ${productId} added to cart.`);
 }
+
+document.getElementById("searchInput").addEventListener("input", (event) => {
+  const searchQuery = event.target.value;
+  currentPage = 1;
+  getData(searchQuery);
+});
 
 getData();

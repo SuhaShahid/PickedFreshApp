@@ -16,22 +16,24 @@
         <li><a href="products.html">Shop</a></li>
         <li><a href="#contactUs">Contact Us</a></li>
         <li><a href="../category/category.html" id="category">Category</a></li>
-        <li>
-          <a href=""><img id="icons" src="../images/searchIcon.png" alt="" /></a>
+        <li> 
+          <input type="search" id="searchInput" placeholder="Search for products..." />
         </li>
         <li>
           <span>
           <a id="cartIcon" href="../add-to-cart/addToCart.html"
             ><img id="icons" src="../images/cart.png"/></a>
-            <p id="cartvalue"></p>
+            <p id="cartvalue">0</p>
           </span>
         </li>
       </ul>
     </nav>
-    <section id="products-sec">
-      <h1>Shop</h1>
-      <div class="boxes"></div>
-    </section>
+    <h1>Shop</h1>
+
+    <div class="grid boxes"></div>
+    <div id="pagination"></div>
+ 
+
     <script src="products.js"></script>
   </body>
 </html>
