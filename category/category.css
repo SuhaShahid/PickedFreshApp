@@ -79,6 +79,10 @@
      width: 50px;
    }
    
+   .box:hover{
+    background-color: #cbc3c3;
+    border-color: #cbc3c3;
+   }
    .box button {
      padding: 6px 15px;
      border-radius: 4px;

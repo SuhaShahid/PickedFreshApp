@@ -20,7 +20,6 @@ function getPage(data) {
     categoryBoxes += `
       <div class="box">
           <h3>${category.name}</h3>
-        <button type="button">Buy</button>
       </div>
     `;
   }

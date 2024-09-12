@@ -26,7 +26,7 @@ function getPage(data) {
         <h4>${product.title}</h4>
         <h4>${product.category}</h4>
         <p>${product.description}</p>
-        <button type="button">Buy</button>
+        <button id="addToCart" type="button">Add To Cart</button>
       </div>
     `;
   }
@@ -36,4 +36,9 @@ function getPage(data) {
   boxes.innerHTML = bodyContent;
 }
 
+let addToCartBtn=document.getElementById('addToCart');
+let cartIcon = document.getElementById('cartIcon')
+addToCartBtn.addEventListener('click',()=>{
+  alert('Added To cart')
+})
 getData();

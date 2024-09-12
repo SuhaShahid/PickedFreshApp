@@ -83,7 +83,9 @@ a:hover {
   font-size: 14px;
   cursor: pointer;
 }
-
+button i {
+  color: #fff;
+}
 .box button:hover {
   background-color: #444;
 }
@@ -94,6 +96,15 @@ h1 {
   font-size: 40px;
 }
 
+span {
+  display: flex;
+}
+#cartIcon{
+  position: relative;
+}
+#cartvalue{
+  margin: 8px 2px;
+}
 @media screen and (min-width: 320px) and (max-width: 768px) {
   nav ul {
     flex-direction: column;
