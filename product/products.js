@@ -36,9 +36,9 @@ function getPage(data) {
   boxes.innerHTML = bodyContent;
 }
 
-let addToCartBtn=document.getElementById('addToCart');
-let cartIcon = document.getElementById('cartIcon')
-addToCartBtn.addEventListener('click',()=>{
-  alert('Added To cart')
-})
+let addToCartBtn = document.getElementById("addToCart");
+let cartIcon = document.getElementById("cartIcon");
+addToCartBtn.addEventListener("click", () => {
+  alert("Added To cart");
+});
 getData();
