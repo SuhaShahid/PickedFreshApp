@@ -26,19 +26,21 @@ function getPage(data) {
         <h4>${product.title}</h4>
         <h4>${product.category}</h4>
         <p>${product.description}</p>
-        <button id="addToCart" type="button">Add To Cart</button>
+        <button class="addToCart" data-id="${product.id}" type="button">Add To Cart</button>
       </div>
     `;
   }
 
-  let bodyContent = `${productBoxes}`;
-
-  boxes.innerHTML = bodyContent;
+  boxes.innerHTML = productBoxes;
+  let addToCartBtns = document.querySelectorAll(".addToCart");
+  addToCartBtns.forEach((btn) =>
+    btn.addEventListener("click", addToCart)
+  );
 }
 
-let addToCartBtn = document.getElementById("addToCart");
-let cartIcon = document.getElementById("cartIcon");
-addToCartBtn.addEventListener("click", () => {
-  alert("Added To cart");
-});
+function addToCart(event) {
+  let productId = event.target.dataset.id;
+  console.log(`Product with ID ${productId} added to cart.`);
+}
+
 getData();
