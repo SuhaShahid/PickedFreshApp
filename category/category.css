@@ -44,7 +44,15 @@
    a:hover {
      text-shadow: 2px 2px 10px rgba(36, 36, 36, 0.5);
    }
-   
+   span {
+    display: flex;
+  }
+  #cartIcon{
+    position: relative;
+  }
+  #cartvalue{
+    margin: 8px 2px;
+  }
    .search input[type="search"] {
      padding: 8px;
      border: 1px solid #ccc;
