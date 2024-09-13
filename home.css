@@ -81,7 +81,9 @@ section {
 .textContainer h1 {
   font-size: 45px;
 }
-
+#btn1{
+  background-color: rgb(230, 213, 61);
+}
 #shop {
   color: rgb(187, 187, 68);
 }

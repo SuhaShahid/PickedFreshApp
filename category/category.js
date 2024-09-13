@@ -1,10 +1,15 @@
 let categoriesData = [];
 
-function getData() {
-  fetch("https://dummyjson.com/products/categories")
+function getData(categoryId) {
+  let url=  `https://dummyjson.com/products/categories`
+  if(categoryId)
+    url = `https://dummyjson.com/products${
+      category ? `/category/${category}` : ""
+    }`
+  fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      categoriesData = data; 
+      categoriesData = data;
       console.log(categoriesData);
       getPage(categoriesData);
     })
@@ -19,12 +24,16 @@ function getPage(data) {
     let category = data[i];
     categoryBoxes += `
       <div class="box">
-          <h3>${category.name}</h3>
+          <h3 data-category=${category.slug}>${category.name}</h3>
       </div>
     `;
   }
 
   boxes.innerHTML = categoryBoxes;
+  document.querySelector('.box').addEventListener(('click'),(event)=>{
+    let categoryId= event.target.dataset.category
+    getData(categoryId)
+  })
 }
 
 getData();

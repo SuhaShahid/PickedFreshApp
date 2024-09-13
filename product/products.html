@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="products.css" />
-    <script src="https://kit.fontawesome.com/8cf3cf221c.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/8cf3cf221c.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Products</title>
   </head>
   <body>
@@ -17,22 +20,35 @@
         <li><a href="#contactUs">Contact Us</a></li>
         <li><a href="../category/category.html" id="category">Category</a></li>
         <li id="searchContainer">
-          <a href=""><img id="searchIcon" src="../images/searchIcon.png" alt="" /></a>
+          <a href=""
+            ><img id="searchIcon" src="../images/searchIcon.png" alt=""
+          /></a>
         </li>
         <li>
           <span>
-          <a id="cartIcon" href="../add-to-cart/addToCart.html"
-            ><img id="icons" src="../images/cart.png"/></a>
+            <a id="cartIcon"               ><img id="icons" src="../images/cart.png"
+            /></a>
             <p id="cartvalue">0</p>
           </span>
         </li>
       </ul>
     </nav>
+    <div class="sideBar">
+      <h2>Cart</h2>
+      <div class="cartContainer">
+        <span class="sidespan">
+          <h4>Image</h4>
+          <h4>Name</h4>
+          <h4>Quantity</h4>
+          <h4>Price</h4>
+        </span>
+      </div>
+      <h2 id="total">Total</h2>
+      <input type="button" value="Checkout" />
+    </div>
     <h1>Shop</h1>
-
     <div class="grid boxes"></div>
     <div id="pagination"></div>
- 
 
     <script src="products.js"></script>
   </body>
