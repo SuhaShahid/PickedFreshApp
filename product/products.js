@@ -73,7 +73,7 @@ function setupPagination() {
 function addToCart(event) {
   let productId = event.target.dataset.id;
   cartCount++; 
-  document.getElementById("cartvalue").textContent = cartCount; // Update cart display
+  document.getElementById("cartvalue").textContent = cartCount; 
   console.log(`Product with ID ${productId} added to cart.`);
 }
 
