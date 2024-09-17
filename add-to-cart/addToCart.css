@@ -54,10 +54,11 @@ h1 {
 
 .cartItem {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 15px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .cartItem img {
@@ -65,11 +66,21 @@ h1 {
   height: 100px;
   object-fit: cover;
   margin-right: 15px;
+  flex-shrink: 0;
 }
 
 .cartItem p {
   margin: 0;
   font-size: 16px;
+  flex: 1;
+}
+
+.cartItem .details {
+  flex: 1;
+}
+
+.cartItem .details p {
+  margin-bottom: 5px;
 }
 
 #totalPrice {
