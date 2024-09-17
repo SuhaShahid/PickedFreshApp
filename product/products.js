@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   let productsData = [];
   let totalItems = 0;
   let limit = 20;
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let cartItems = [];
   let totalPrice = 0;
 
-  function getData(searchQuery = "", category = "", page = 1) {
+  function getData(searchQuery, category, page = 1) {
     let skip = (page - 1) * limit;
     let url = `https://dummyjson.com/products${
       category ? `/category/${category}` : ""
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cartIcon && sidebar) {
     cartIcon.addEventListener("click", () => {
       sidebar.classList.toggle("open");
-      updateSidebar(); // Ensure sidebar is updated when opened
+      updateSidebar();
     });
 
     const closeBtn = document.createElement("span");
@@ -106,65 +106,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (existingProduct) {
       existingProduct.quantity += 1;
-      document.querySelector(
-        `.cartItem[data-id="${productId}"] .quantity`
-      ).textContent = existingProduct.quantity;
     } else {
       cartItems.push({ ...product, quantity: 1 });
       cartCount++;
       document.getElementById("cartvalue").textContent = cartCount;
-
-      let cartContainer = document.querySelector(".cartContainer");
-      let cartItem = document.createElement("div");
-      cartItem.classList.add("cartItem");
-      cartItem.setAttribute("data-id", productId);
-      cartItem.innerHTML = `
-        <span class="sidespan">
-          <img src="${product.thumbnail}" style="width: 50px; height: 50px;">
-          <p>${product.title}</p>
-          <p class="quantity">1</p>
-          <p>$${product.price}</p>
-        </span>
-      `;
-      cartContainer.appendChild(cartItem);
     }
-    
-    // Update total price
+
     totalPrice += product.price;
     updateSidebar();
   }
 
   function updateSidebar() {
     const cartContainer = document.querySelector(".cartContainer");
-    const totalPriceElem = document.getElementById("totalPrice");
+    const totalPriceElem = document.getElementById("total");
+  
     if (cartContainer) {
-      cartContainer.innerHTML = cartItems.map(item => `
-        <div class="cartItem" data-id="${item.id}">
-          <span class="sidespan">
-            <img src="${item.thumbnail}" style="width: 50px; height: 50px;">
-            <p>${item.title}</p>
-            <p class="quantity">${item.quantity}</p>
-            <p>$${(item.price * item.quantity).toFixed(2)}</p>
-          </span>
-        </div>
-      `).join('');
+      cartContainer.innerHTML = ''; 
+  
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+  
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cartItem');
+        cartItem.setAttribute('data-id', item.id);
+  
+        const img = document.createElement('img');
+        img.src = item.thumbnail;
+        img.alt = item.title;
+  
+        const title = document.createElement('p');
+        title.textContent = item.title;
+  
+        const quantity = document.createElement('p');
+        quantity.classList.add('quantity');
+        quantity.textContent = `x${item.quantity}`;
+  
+        const price = document.createElement('p');
+        price.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+  
+        cartItem.appendChild(img);
+        cartItem.appendChild(title);
+        cartItem.appendChild(quantity);
+        cartItem.appendChild(price);
+        
+        cartContainer.appendChild(cartItem);
+      }
     }
-    if (totalPriceElem) {
-      totalPriceElem.textContent = `Total: $${totalPrice.toFixed(2)}`;
-    }
+  
+    totalPriceElem.textContent = `Total: $${totalPrice.toFixed(2)}`;
   }
+  
 
   const checkoutButton = document.getElementById("checkoutButton");
   if (checkoutButton) {
     checkoutButton.addEventListener("click", () => {
-      window.location.href = "addToCart.html";
+      window.location.href = "../add-to-cart/addToCart.html";
     });
   }
 
-  const searchIcon = document.getElementById("searchIcon");
-  if (searchIcon) {
-    searchIcon.addEventListener("click", () => {
-      const searchContainer = document.getElementById("searchContainer");
+  const searchContainer= document.getElementById("searchContainer");
+  
       if (!document.getElementById("searchInput")) {
         let searchInput = document.createElement("input");
         searchInput.type = "search";
@@ -179,9 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
           getData(searchQuery);
         });
       }
-    });
-  }
-
-  // Initial data fetch
-  getData();
+    ;
+    getData();
 });
