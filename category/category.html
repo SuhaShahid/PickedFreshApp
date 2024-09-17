@@ -11,17 +11,30 @@
       <a href="../home.html"><img id="logo" src="../images/logo.png" /></a>
       <ul>
         <li><a href="../home.html">Home</a></li>
-        <li><a href="../home.html">About Us</a></li>
         <li><a href="../product/products.html">Shop</a></li>
-        <li><a href="#contactUs">Contact Us</a></li>
         <li><a href="category.html" id="category">Category</a></li>
-        
+        <li>
+          <span>
+            <a id="cartIcon"><img id="icons" src="../images/cart.png" /></a>
+            <p id="cartvalue">0</p>
+          </span>
+        </li>
       </ul>
     </nav>
+
     <section id="products-sec">
-      <h1 >Shop By Category</h1>
+      <h1>Shop By Category</h1>
       <div class="boxes"></div>
     </section>
+
+    <div id="cartSidebar" class="sideBar">
+      
+      <span id="closeSidebar">&times;</span>
+      <div id="cartItems"></div>
+      <div id="totalPrice"></div>
+      <button id="checkoutButton">Checkout</button>
+    </div>
+    
     <script src="category.js"></script>
   </body>
 </html>

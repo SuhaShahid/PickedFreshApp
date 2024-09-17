@@ -1,3 +1,8 @@
+/* Global Reset */
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -5,6 +10,7 @@ body {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
+/* Navigation Bar */
 nav {
   display: flex;
   justify-content: space-between;
@@ -39,6 +45,7 @@ a:hover {
   text-shadow: 2px 2px 10px rgba(36, 36, 36, 0.5);
 }
 
+/* Search Bar */
 input[type="search"] {
   padding: 8px;
   border: 1px solid #ccc;
@@ -47,6 +54,7 @@ input[type="search"] {
   color: #333;
 }
 
+/* Product Boxes */
 .products {
   text-align: center;
   background-image: url(images/vegetables-bg.png);
@@ -61,6 +69,7 @@ input[type="search"] {
   padding: 30px;
   margin: 0 auto;
 }
+
 .box {
   background-color: white;
   border: 1px solid #6f6969;
@@ -68,27 +77,7 @@ input[type="search"] {
   padding: 10px;
   box-shadow: 5px 5px 15px rgba(36, 36, 36, 0.3);
   text-align: center;
-}
-
-#pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-}
-
-#pagination button {
-  border: 1px solid #ddd;
-  padding: 8px 12px;
-  margin: 0 4px;
-  background-color: white;
-  color: #000;
-  cursor: pointer;
-  border-radius: 4px;
-}
-#pagination button.active {
-  background-color: #bfd093;
-  color: white;
+  width: 200px;
 }
 
 .box img {
@@ -104,33 +93,20 @@ input[type="search"] {
   font-size: 14px;
   cursor: pointer;
 }
-button i {
-  color: #fff;
-}
+
 .box button:hover {
   background-color: #444;
 }
 
-h1 {
-  font-family: "Times New Roman", Times, serif;
-  text-align: center;
-  font-size: 40px;
-  margin-bottom: 0;
-}
-.category-link {
-  cursor: pointer;
-  color: #5e6c3a;
-  font-weight: 600;
-}
-.category-link:hover {
-  text-decoration: wavy;
-}
+/* Cart Icon and Sidebar */
 span {
   display: flex;
 }
+
 #cartIcon {
   position: relative;
 }
+
 #cartvalue {
   margin: 8px 2px;
   background-color: #ffffffd3;
@@ -138,34 +114,6 @@ span {
   font-size: 13px;
   padding: 5px;
   font-weight: 800;
-}
-
-#closeSidebar {
-  cursor: pointer;
-  color: #000;
-  float: right;
-  padding: 10px;
-  font-size: 20px;
-}
-.sideBar + #cartIcon:hover ,
-.sideBar:hover {
-  right: 0;
-}
-.sidespan {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  text-wrap: wrap;
-}
-
-.sideBar input[type="button"] {
-  padding: 12px 20px;
-  border-radius: 4px;
-  background-color: #000;
-  color: white;
-  margin: 5px 0;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 .sideBar {
@@ -184,9 +132,12 @@ span {
   right: 0;
 }
 
-.cartItem img {
-  width: 50px;
-  height: 50px;
+#closeSidebar {
+  cursor: pointer;
+  color: #000;
+  float: right;
+  padding: 10px;
+  font-size: 20px;
 }
 
 .cartItem {
@@ -196,9 +147,77 @@ span {
   margin-bottom: 10px;
 }
 
+.cartItem img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Pagination */
+#pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+#pagination button {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  margin: 0 4px;
+  background-color: white;
+  color: #000;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#pagination button.active {
+  background-color: #bfd093;
+  color: white;
+}
+
+/* Category Link */
+.category-link {
+  cursor: pointer;
+  color: #5e6c3a;
+  font-weight: 600;
+}
+
+.category-link:hover {
+  text-decoration: wavy;
+}
+
+/* Headings */
+h1 {
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 0;
+}
+
+/* Button */
+.sideBar input[type="button"] {
+  padding: 12px 20px;
+  border-radius: 4px;
+  background-color: #000;
+  color: white;
+  margin: 5px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/* Mobile and Tablet Styles */
 @media screen and (min-width: 320px) and (max-width: 768px) {
-  nav ul {
+  nav {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+
+  ul {
+    flex-direction: column;
+    text-align: center;
+    padding: 0;
   }
 
   ul li {
@@ -208,18 +227,29 @@ span {
   .boxes {
     display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+
+  .box {
+    margin: 0 auto;
+    padding: 20px;
   }
 
   .box img {
     height: 100px;
     width: 100px;
   }
-  .box {
-    margin: 0 auto;
-    text-wrap: wrap;
-    padding: 20px;
+
+  h1 {
+    font-size: 25px;
   }
-  #pagination{
-    text-wrap: wrap;
+
+  #pagination {
+    flex-direction: column;
+  }
+
+  .sideBar {
+    width: 100%;
+    right: -100%;
   }
 }
