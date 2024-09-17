@@ -91,7 +91,7 @@ h1 {
 
 button {
   display: block;
-  width: 100%;
+  width: auto;
   padding: 10px;
   background-color: #bfd093;
   border: none;

@@ -126,7 +126,7 @@ document.getElementById('closeSidebar').addEventListener('click', () => {
   document.getElementById('cartSidebar').classList.remove('active');
 });
 
-document.getElementById('cartIcon').addEventListener('click', toggleCartSidebar);
+document.getElementById('cartIcon').addEventListener('click', updateCartValue);
 
 document.getElementById('checkoutButton').addEventListener('click', () => {
   window.location.href = "../add-to-cart/addToCart.html";
