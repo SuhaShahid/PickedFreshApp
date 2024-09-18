@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="home.css" />
-    <title>PickedFresh</title>
-  </head>
-  <body id="body">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="home.css">
+  <title>Home Page</title>
+</head>
+<body>
+  <header>
     <nav>
-      <a href="home.html"><img id="logo" src="images/logo.png" /></a>
-      <ul>
+      <a href="home.html"><img id="logo" src="images/logo.png" alt="Logo" /></a>
+      <ul id="navbar">
         <li><a href="home.html">Home</a></li>
-        <li><a href="#about-sec">About Us</a></li>
-        <li><a href="product/products.html">Shop</a></li>
-        <li><a href="#contactUs">Contact Us</a></li>
-        <li><a href="category/category.html" id="category">Category</a></li>
-        
+        <li><a href="../product/products.html">Shop</a></li>
+        <li id="category-hover">
+          <a href="#">Category</a>
+          <ul id="category-dropdown">
+          </ul>
+        </li>
+        <li><a href="add-to-cart/addToCart.html">Cart</a></li>
       </ul>
+      <div id="menu-icon" onclick="toggleMenu()">&#9776;</div>
     </nav>
+  </header>
 
-    
+  <main>
     <section id="intro-sec">
       <div class="intro">
         <div class="imgContainer">
-          <img id="about-img" src="images/img-1.png" />
+          <img id="about-img" src="images/img-1.png" alt="Introduction Image"/>
         </div>
         <div class="textContainer">
           <h1>Vegetables</h1>
           <h1 id="shop">Shop</h1>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit...</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
           <div class="buttons">
             <a href="product/products.html"><button id="btn1" type="button">Buy Now</button></a>
             <button type="button">Read More</button>
@@ -36,7 +41,8 @@
         </div>
       </div>
     </section>
-<section id="about-sec">
+
+    <section id="about-sec">
       <div class="about">
         <img src="images/img-2.png" />
         <h1>About Our Shop</h1>
@@ -50,13 +56,6 @@
         </div>
       </div>
     </section>
-    <section id="products-sec">
-      <div class="products">
-      <img src="images/img-2.png" />
-        <h1>Our Vegetables</h1>
-        <div class="boxes">
-        </div>
-      </div>
     </section>
     <section id="whyUs-sec">
       <div class="chooseUs">
@@ -114,31 +113,32 @@
         <div class="map"></div>
       </div>
     </section>
-    <footer id="footer">
-      <div class="columns">
-        <h1>Address</h1>
-        <p><img src="images/map-icon.png" />No.123 Chailngt Fated</p>
-        <p><img src="images/call-icon.png" />+92 33028309</p>
-        <p><img src="images/mail-icon.png" />Location</p>
-      </div>
-      <div class="columns">
-        <h1>Social Link</h1>
-        <p><img src="images/fb-icon.png" />Facebook</p>
-        <p><img src="images/twitter-icon.png" />Twitter</p>
-        <p><img src="images/linkedin-icon.png" />Linkedin</p>
-        <p><img src="images/instagram-icon.png" />Instagram</p>
-      </div>
-      <div class="columns" id="newsletter">
-        <h1>NewsLetter</h1>
-        <input type="text" placeholder="Your Email" />
-        <br />
-        <button type="button">Subscribe</button>
-      </div>
-    </footer>
-    <div class="copyRight">
-      <p>CopyRight 2024 All Rights Reserved</p>
+  </main>
+
+  <footer id="footer">
+    <div class="columns">
+      <h1>Address</h1>
+      <p><img src="images/map-icon.png" alt="Map Icon"/>No.123 Chailngt Fated</p>
+      <p><img src="images/call-icon.png" alt="Call Icon"/>+92 33028309</p>
+      <p><img src="images/mail-icon.png" alt="Mail Icon"/>Location</p>
     </div>
-     
-    <script src="home.js"></script>
-  </body>
+    <div class="columns">
+      <h1>Social Link</h1>
+      <p><img src="images/fb-icon.png" alt="Facebook Icon"/>Facebook</p>
+      <p><img src="images/twitter-icon.png" alt="Twitter Icon"/>Twitter</p>
+      <p><img src="images/linkedin-icon.png" alt="LinkedIn Icon"/>LinkedIn</p>
+      <p><img src="images/instagram-icon.png" alt="Instagram Icon"/>Instagram</p>
+    </div>
+    <div class="columns" id="newsletter">
+      <h1>Newsletter</h1>
+      <input type="email" placeholder="Your Email"/>
+      <button type="submit">Subscribe</button>
+    </div>
+  </footer>
+  <div class="copyRight">
+    <p>&copy; 2024 All Rights Reserved</p>
+  </div>
+
+  <script src="home.js"></script>
+</body>
 </html>

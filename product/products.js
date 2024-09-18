@@ -3,38 +3,37 @@ document.addEventListener("DOMContentLoaded", () => {
   let totalItems = 0;
   let limit = 20;
   let currentPage = 1;
-  let cartCount = 0;
   let cartItems = [];
-  let totalPrice = 0;
+
+  loadCartItems();
 
   function getData(searchQuery, category, page = 1) {
-    let skip = (page - 1) * limit;
-    let url = `https://dummyjson.com/products${
-      category ? `/category/${category}` : ""
-    }?limit=${limit}&skip=${skip}`;
+    const skip = (page - 1) * limit;
+    let url = `https://dummyjson.com/products${category ? `/category/${category}` : ""}?limit=${limit}&skip=${skip}`;
+
     if (searchQuery) {
       url = `https://dummyjson.com/products/search?q=${searchQuery}&limit=${limit}&skip=${skip}`;
     }
 
     fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        totalItems = data.total;
-        productsData = data.products;
-        getPage(productsData);
+      .then(res => res.json())
+      .then(data => {
+        totalItems = data.total || data.length;
+        productsData = data.products || data;
+        getProducts(productsData);
         setupPagination();
       })
-      .catch((error) => console.error("Error:", error));
+      .catch(error => console.error("Error:", error));
   }
 
-  function getPage(data) {
-    let boxes = document.querySelector(".boxes");
+  function getProducts(data) {
+    const boxes = document.querySelector(".boxes");
     let productBoxes = "";
 
-    data.forEach((product) => {
+    data.forEach(product => {
       productBoxes += `
         <div class="box">
-          <img src="${product.thumbnail}" />
+          <img src="${product.thumbnail}" alt="${product.title}" />
           <h3>$${product.price}</h3>
           <h4>${product.title}</h4>
           <h4 class="category-link" data-category="${product.category}">${product.category}</h4>
@@ -46,11 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     boxes.innerHTML = productBoxes;
 
-    document
-      .querySelectorAll(".addToCart")
-      .forEach((btn) => btn.addEventListener("click", addToCart));
-
-    document.querySelectorAll(".category-link").forEach((link) =>
+    document.querySelectorAll(".addToCart").forEach(btn =>
+      btn.addEventListener("click", addToCart)
+    );
+    document.querySelectorAll(".category-link").forEach(link =>
       link.addEventListener("click", (event) => {
         const category = event.target.dataset.category;
         currentPage = 1;
@@ -62,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function setupPagination() {
     const pagination = document.getElementById("pagination");
     if (pagination) {
-      pagination.innerHTML = "";
+      pagination.innerHTML = '';
       const totalPages = Math.ceil(totalItems / limit);
 
       for (let i = 1; i <= totalPages; i++) {
@@ -76,6 +74,82 @@ document.addEventListener("DOMContentLoaded", () => {
 
         pagination.appendChild(button);
       }
+    }
+  }
+
+  function addToCart(event) {
+    const productId = event.target.dataset.id;
+    const product = productsData.find(item => item.id == productId);
+
+    if (!product) return;
+
+    const existingProduct = cartItems.find(item => item.id == productId);
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      cartItems.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    updateSidebar();
+    updateCartIcon();
+  }
+
+  function updateSidebar() {
+    const cartContainer = document.querySelector(".cartContainer");
+    const totalPriceElem = document.getElementById("total");
+
+    if (cartContainer) {
+      cartContainer.innerHTML = '';
+
+      cartItems.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cartItem');
+        cartItem.setAttribute('data-id', item.id);
+
+        const img = document.createElement('img');
+        img.src = item.thumbnail;
+        img.alt = item.title;
+
+        const title = document.createElement('p');
+        title.textContent = item.title;
+
+        const quantity = document.createElement('p');
+        quantity.classList.add('quantity');
+        quantity.textContent = `x${item.quantity}`;
+
+        const price = document.createElement('p');
+        price.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+
+        cartItem.appendChild(img);
+        cartItem.appendChild(title);
+        cartItem.appendChild(quantity);
+        cartItem.appendChild(price);
+
+        cartContainer.appendChild(cartItem);
+      });
+    }
+
+    const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    if (totalPriceElem) {
+      totalPriceElem.textContent = `Total: $${totalPrice.toFixed(2)}`;
+    }
+  }
+
+  function updateCartIcon() {
+    const cartIcon = document.getElementById("cartvalue");
+    if (cartIcon) {
+      cartIcon.textContent = cartItems.length;
+    }
+  }
+
+  function loadCartItems() {
+    const storedCartItems = localStorage.getItem('cartItems');
+    if (storedCartItems) {
+      cartItems = JSON.parse(storedCartItems);
+      updateSidebar();
+      updateCartIcon();
     }
   }
 
@@ -97,62 +171,23 @@ document.addEventListener("DOMContentLoaded", () => {
       sidebar.classList.remove("open");
     });
   }
-  function addToCart(event) {
-    let productId = event.target.dataset.id;
-    let product = productsData.find((item) => item.id == productId);
-  
-    let existingProduct = cartItems.find((item) => item.id == productId);
-  
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-    } else {
-      cartItems.push({ ...product, quantity: 1 });
-    }
-  
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    updateSidebar();
-  }
-  
 
-  function updateSidebar() {
-    const cartContainer = document.querySelector(".cartContainer");
-    const totalPriceElem = document.getElementById("total");
-  
-    if (cartContainer) {
-      cartContainer.innerHTML = ''; 
-  
-      cartItems.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cartItem');
-        cartItem.setAttribute('data-id', item.id);
-  
-        const img = document.createElement('img');
-        img.src = item.thumbnail;
-        img.alt = item.title;
-  
-        const title = document.createElement('p');
-        title.textContent = item.title;
-  
-        const quantity = document.createElement('p');
-        quantity.classList.add('quantity');
-        quantity.textContent = `x${item.quantity}`;
-  
-        const price = document.createElement('p');
-        price.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
-  
-        cartItem.appendChild(img);
-        cartItem.appendChild(title);
-        cartItem.appendChild(quantity);
-        cartItem.appendChild(price);
-  
-        cartContainer.appendChild(cartItem);
-      });
-    }
-  
-    const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    totalPriceElem.textContent = `Total: $${totalPrice.toFixed(2)}`;
+  const searchContainer = document.getElementById("searchContainer");
+
+  if (!document.getElementById("searchInput")) {
+    const searchInput = document.createElement("input");
+    searchInput.type = "search";
+    searchInput.id = "searchInput";
+    searchInput.placeholder = "Search for products...";
+    searchContainer.appendChild(searchInput);
+
+    searchInput.addEventListener("input", (event) => {
+      event.preventDefault();
+      const searchQuery = event.target.value;
+      currentPage = 1;
+      getData(searchQuery);
+    });
   }
-  
 
   const checkoutButton = document.getElementById("checkoutButton");
   if (checkoutButton) {
@@ -161,22 +196,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const searchContainer= document.getElementById("searchContainer");
+  function fetchCategories() {
+    fetch('https://dummyjson.com/products/categories')
+      .then(response => response.json())
+      .then(categories => {
+        const dropdown = document.getElementById("category-dropdown");
+        dropdown.innerHTML = '';
   
-      if (!document.getElementById("searchInput")) {
-        let searchInput = document.createElement("input");
-        searchInput.type = "search";
-        searchInput.id = "searchInput";
-        searchInput.placeholder = "Search for products...";
-        searchContainer.appendChild(searchInput);
-
-        searchInput.addEventListener("input", (event) => {
-          event.preventDefault();
-          const searchQuery = event.target.value;
-          currentPage = 1;
-          getData(searchQuery);
+        categories.forEach(category => {
+          const listItem = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = '#';
+          link.dataset.category = category.slug;
+          link.textContent = category.name;
+  
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const category = event.target.dataset.category;
+            currentPage = 1;
+            getData("", category);
+          });
+  
+          listItem.appendChild(link);
+          dropdown.appendChild(listItem);
         });
-      }
-    ;
+      })
+      .catch(error => console.error("Error fetching categories:", error));
+  }
+  
+  fetchCategories();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const category = urlParams.get('category');
+  if (category) {
+    getData("", category);
+  } else {
     getData();
+  }
 });

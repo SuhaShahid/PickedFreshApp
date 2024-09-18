@@ -1,39 +1,19 @@
-let productsData = [];
-let totalItems = 0;
+function toggleMenu() {
+  document.getElementById("navbar").classList.toggle("show");
+}
 
-function getData() {
-  fetch("https://dummyjson.com/products/category/groceries?limit=10")
-    .then((res) => res.json())
-    .then((data) => {
-      totalItems = data.total;
-      productsData = data.products;
-      console.log(data);
-      getPage(productsData);
+function fetchCategories() {
+  fetch('https://dummyjson.com/products/categories')
+    .then(response => response.json())
+    .then(categories => {
+      const dropdown = document.getElementById("category-dropdown");
+      dropdown.innerHTML = categories.map(category => `
+        <li><a href="../product/products.html?category=${encodeURIComponent(category.slug)}">${category.name}</a></li>
+      `).join("");
     })
-    .catch((error) => console.error("Error:", error));
+    .catch(error => console.error("Error fetching categories:", error));
 }
 
-function getPage(data) {
-  let boxes = document.querySelector(".boxes");
-  let productBoxes = "";
-
-  for (let i = 0; i < data.length; i++) {
-    let product = data[i];
-    productBoxes += `
-      <div class="box">
-        <img src="${product.thumbnail}" />
-        <h3>$${product.price}</h3>
-        <h4>${product.title}</h4>
-        <h4>${product.category}</h4>
-        <p>${product.description}</p>
-        <a href="product/products.html"><button type="button">Buy</button></a>
-      </div>
-    `;
-  }
-
-  let bodyContent = `${productBoxes}`;
-
-  boxes.innerHTML = bodyContent;
-}
-
-getData();
+document.addEventListener("DOMContentLoaded", () => {
+  fetchCategories();
+});
