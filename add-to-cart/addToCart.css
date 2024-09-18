@@ -148,8 +148,7 @@ button:hover {
 .removeButton:hover {
   background-color: #c0392b;
 }
-
-@media (max-width: 768px) {
+@media (max-width:768px) {
   nav {
     flex-direction: column;
     align-items: flex-start;
@@ -165,13 +164,13 @@ button:hover {
   }
 
   .cartContainer {
-    gap: 10px; /* Less spacing on smaller screens */
+    gap: 10px; 
   }
 
   .cartItem {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px; /* Vertical spacing between image and text */
+    flex-direction: column; 
+   align-items: flex-start; 
+    gap: 10px; 
   }
 
   .cartItem img {
@@ -184,13 +183,38 @@ button:hover {
   }
 }
 
-@media (max-width: 480px) {
-  nav {
-    padding: 10px;
+@media (min-width: 768px) and (max-width: 1020px){
+
+
+  ul {
+    flex-direction: column;
+    padding: 0;
   }
 
-  nav #logo {
-    height: 30px;
+  li {
+    padding: 10px 0;
+  }
+
+  .cartContainer {
+    gap: 10px; 
+  }
+
+  .cartItem {
+    gap: 10px; 
+  }
+
+  .cartItem img {
+    width: 80px;
+    height: 80px;
+  }
+
+  #totalPrice {
+    font-size: 18px;
+  }
+}
+
+    nav #logo {
+    height: 20px;
   }
 
   button {
@@ -199,7 +223,7 @@ button:hover {
   }
 
   .cartContainer {
-    gap: 5px; /* Minimal spacing on the smallest screens */
+    gap: 5px; 
   }
 
   .cartItem {
@@ -214,4 +238,4 @@ button:hover {
   #totalPrice {
     font-size: 16px;
   }
-}
+
