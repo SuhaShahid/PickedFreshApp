@@ -6,10 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let cartItems = [];
 
   loadCartItems();
+  fetchCategories(); 
 
-  function getData(searchQuery, category, page = 1) {
+  function getData(searchQuery = "", category = "", page = 1) {
     const skip = (page - 1) * limit;
-    let url = `https://dummyjson.com/products${category ? `/category/${category}` : ""}?limit=${limit}&skip=${skip}`;
+    let url = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
+
+    if (category) {
+      url = `https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`;
+    }
 
     if (searchQuery) {
       url = `https://dummyjson.com/products/search?q=${searchQuery}&limit=${limit}&skip=${skip}`;
@@ -23,9 +28,34 @@ document.addEventListener("DOMContentLoaded", () => {
         getProducts(productsData);
         setupPagination();
       })
-      .catch(error => console.error("Error:", error));
+      .catch(error => console.error("Error fetching products:", error));
   }
-
+  function fetchCategories() {
+    fetch('https://dummyjson.com/products/categories')
+      .then(response => response.json())
+      .then(categories => {
+        const dropdown = document.getElementById("category-dropdown");
+        const sidebarDropdown = document.getElementById("category-dropdown-sidebar");
+  
+        const categoryItems = categories.map(category => `
+          <li><a href="#" class="category-link" data-category="${encodeURIComponent(category.slug)}">${category.name}</a></li>
+        `).join("");
+  
+        if (dropdown) dropdown.innerHTML = categoryItems;
+        if (sidebarDropdown) sidebarDropdown.innerHTML = categoryItems;
+  
+        document.querySelectorAll(".category-link").forEach(link =>
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            const selectedCategory = event.target.dataset.category;
+            getData("", selectedCategory);
+            window.history.pushState({}, "", `?category=${selectedCategory}`);
+          })
+        );
+      })
+      .catch(error => console.error("Error fetching categories:", error));
+  }
+  
   function getProducts(data) {
     const boxes = document.querySelector(".boxes");
     let productBoxes = "";
@@ -48,13 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".addToCart").forEach(btn =>
       btn.addEventListener("click", addToCart)
     );
-    document.querySelectorAll(".category-link").forEach(link =>
-      link.addEventListener("click", (event) => {
-        const category = event.target.dataset.category;
-        currentPage = 1;
-        getData("", category);
-      })
-    );
   }
 
   function setupPagination() {
@@ -69,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (i === currentPage) button.classList.add("active");
         button.addEventListener("click", () => {
           currentPage = i;
-          getData(document.getElementById("searchInput")?.value || "", "", i);
+          getData(document.getElementById("searchInput").value || "", new URLSearchParams(window.location.search).get('category'), i);
         });
 
         pagination.appendChild(button);
@@ -131,106 +154,30 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    if (totalPriceElem) {
-      totalPriceElem.textContent = `Total: $${totalPrice.toFixed(2)}`;
-    }
-  }
-
-  function updateCartIcon() {
-    const cartIcon = document.getElementById("cartvalue");
-    if (cartIcon) {
-      cartIcon.textContent = cartItems.length;
-    }
+    totalPriceElem.textContent = `Total: $${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}`;
   }
 
   function loadCartItems() {
-    const storedCartItems = localStorage.getItem('cartItems');
+    const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
     if (storedCartItems) {
-      cartItems = JSON.parse(storedCartItems);
+      cartItems = storedCartItems;
       updateSidebar();
       updateCartIcon();
     }
   }
 
-  const cartIcon = document.getElementById("cartIcon");
-  const sidebar = document.querySelector(".sideBar");
-
-  if (cartIcon && sidebar) {
-    cartIcon.addEventListener("click", () => {
-      sidebar.classList.toggle("open");
-      updateSidebar();
-    });
-
-    const closeBtn = document.createElement("span");
-    closeBtn.id = "closeSidebar";
-    closeBtn.innerHTML = "&times;";
-    sidebar.insertBefore(closeBtn, sidebar.firstChild);
-
-    closeBtn.addEventListener("click", () => {
-      sidebar.classList.remove("open");
-    });
+  function updateCartIcon() {
+    const cartValueElem = document.getElementById("cartvalue");
+    if (cartValueElem) {
+      cartValueElem.textContent = cartItems.length;
+    }
   }
 
-  const searchContainer = document.getElementById("searchContainer");
+  document.getElementById("searchInput").addEventListener("input", (event) => {
+    const query = event.target.value;
+    getData(query, new URLSearchParams(window.location.search).get('category'));
+  });
 
-  if (!document.getElementById("searchInput")) {
-    const searchInput = document.createElement("input");
-    searchInput.type = "search";
-    searchInput.id = "searchInput";
-    searchInput.placeholder = "Search for products...";
-    searchContainer.appendChild(searchInput);
-
-    searchInput.addEventListener("input", (event) => {
-      event.preventDefault();
-      const searchQuery = event.target.value;
-      currentPage = 1;
-      getData(searchQuery);
-    });
-  }
-
-  const checkoutButton = document.getElementById("checkoutButton");
-  if (checkoutButton) {
-    checkoutButton.addEventListener("click", () => {
-      window.location.href = "../add-to-cart/addToCart.html";
-    });
-  }
-
-  function fetchCategories() {
-    fetch('https://dummyjson.com/products/categories')
-      .then(response => response.json())
-      .then(categories => {
-        const dropdown = document.getElementById("category-dropdown");
-        dropdown.innerHTML = '';
-  
-        categories.forEach(category => {
-          const listItem = document.createElement('li');
-          const link = document.createElement('a');
-          link.href = '#';
-          link.dataset.category = category.slug;
-          link.textContent = category.name;
-  
-          link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const category = event.target.dataset.category;
-            currentPage = 1;
-            getData("", category);
-          });
-  
-          listItem.appendChild(link);
-          dropdown.appendChild(listItem);
-        });
-      })
-      .catch(error => console.error("Error fetching categories:", error));
-  }
-  
-  fetchCategories();
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const category = urlParams.get('category');
-  if (category) {
-    getData("", category);
-  } else {
-    getData();
-  }
+  const category = new URLSearchParams(window.location.search).get('category');
+  getData("", category);
 });

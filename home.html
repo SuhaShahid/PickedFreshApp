@@ -15,14 +15,27 @@
         <li><a href="../PickedFreshApp/product/products.html">Shop</a></li>
         <li id="category-hover">
           <a href="#">Category</a>
-          <ul id="category-dropdown">
-          </ul>
+          <ul id="category-dropdown"></ul>
         </li>
         <li><a href="add-to-cart/addToCart.html">Cart</a></li>
       </ul>
-      <div id="menu-icon" onclick="toggleMenu()">&#9776;</div>
+      <div id="menu-icon" onclick="toggleSidebar()">&#9776;</div>
     </nav>
   </header>
+  
+  <div id="sidebar">
+    <span class="close-btn" onclick="toggleSidebar()">&#10005;</span>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="../PickedFreshApp/product/products.html">Shop</a></li>
+      <li id="category-hover">
+        <a href="#">Category</a>
+        <ul id="category-dropdown"></ul>
+      </li>
+      <li><a href="add-to-cart/addToCart.html">Cart</a></li>
+    </ul>
+  </div>
+  
 
   <main>
     <section id="intro-sec">
@@ -41,7 +54,6 @@
         </div>
       </div>
     </section>
-
     <section id="about-sec">
       <div class="about">
         <img src="images/img-2.png" />
