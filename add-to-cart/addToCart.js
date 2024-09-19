@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("checkoutButton").addEventListener("click", () => {
     localStorage.clear();
-    window.location.href = "../home.html";
+    window.location.href = "../index.html";
   });
 
   updateCart();
