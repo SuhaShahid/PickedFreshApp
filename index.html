@@ -12,25 +12,25 @@
       <a href="index.html"><img id="logo" src="images/logo.png" alt="Logo" /></a>
       <ul id="navbar">
         <li><a href="index.html">Home</a></li>
-        <li><a href="../PickedFreshApp/product/products.html">Shop</a></li>
+        <li><a href="../product/products.html">Shop</a></li>
         <li id="category-hover">
           <a href="#">Category</a>
-          <ul id="category-dropdown"></ul>
+          <ul id="category-dropdown"></ul> <!-- For desktop -->
         </li>
         <li><a href="add-to-cart/addToCart.html">Cart</a></li>
       </ul>
-      <div id="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+      <div id="menu-icon">&#9776;</div>
     </nav>
   </header>
-  
+
   <div id="sidebar">
-    <span class="close-btn" onclick="toggleSidebar()">&#10005;</span>
+    <span class="close-btn">&#10005;</span>
     <ul>
       <li><a href="index.html">Home</a></li>
-      <li><a href="../PickedFreshApp/product/products.html">Shop</a></li>
-      <li id="category-hover">
+      <li><a href="../product/products.html">Shop</a></li>
+      <li id="category-hover-sidebar">
         <a href="#">Category</a>
-        <ul id="category-dropdown"></ul>
+        <ul id="category-dropdown-sidebar"></ul> <!-- For mobile -->
       </li>
       <li><a href="add-to-cart/addToCart.html">Cart</a></li>
     </ul>

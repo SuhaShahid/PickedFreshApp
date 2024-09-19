@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener('click', (event) => {
     if (event.target.classList.contains('category-link')) {
       const category = event.target.dataset.category;
-      window.location.href = `../PickedFreshApp/product/products.html?category=${encodeURIComponent(category)}`;
+      window.location.href = `../product/products.html?category=${encodeURIComponent(category)}`;
     }
   });
 });
